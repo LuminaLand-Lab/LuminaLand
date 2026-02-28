@@ -1,6 +1,6 @@
 # LuminaLand ✨
 
-https://github.com/LuminaLand-Lab/LuminaLand/blob/main/assets/hero-main.png
+![LuminaLand Hero](https://raw.githubusercontent.com/LuminaLand-Lab/LuminaLand/main/assets/hero-main.png)
 
 **Le métaverse illuminé par l’IA**  
 Prompt-to-World en moins de 8 secondes • IA compagnons autonomes • Économie $LUMI déflationniste
