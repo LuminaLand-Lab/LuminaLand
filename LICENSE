@@ -1,21 +1,39 @@
-MIT License
+Business Source License 1.1
 
-Copyright (c) 2026 LuminaLand
+Licensed Work:        LuminaLand – Le métaverse illuminé par l'IA
+                      (tout le code source, whitepaper, tokenomics, assets, contrats Solidity, frontend, etc.)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Licensor:             LuminaLand-Lab
+Copyright:            © 2026 LuminaLand-Lab. Tous droits réservés.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Additional Use Grant: Aucun
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Change Date:          2030-02-28
+
+Change License:       Apache License, Version 2.0
+
+-----------------------------------------------------------------------------
+
+Business Source License 1.1
+
+PARAMÈTRES
+
+Licensor:             LuminaLand-Lab
+Licensed Work:        LuminaLand
+                      (incluant tous les fichiers, contrats, documents, images et dérivés)
+Copyright:            © 2026 LuminaLand-Lab. All Rights Reserved.
+
+Change Date:          February 28, 2030
+Change License:       Apache-2.0
+
+-----------------------------------------------------------------------------
+
+Vous êtes autorisé à utiliser, copier et modifier ce travail **uniquement à des fins non-commerciales** jusqu’à la Change Date.
+
+Toute utilisation commerciale (lancement d’un métaverse concurrent, fork commercial, intégration payante sans accord écrit, etc.) est strictement interdite avant le 28 février 2030 sans licence commerciale signée avec LuminaLand-Lab.
+
+Après la Change Date, ce travail passe automatiquement sous licence Apache 2.0.
+
+Pour toute demande de licence commerciale anticipée ou partenariat d’acquisition, contactez : contact@luminaland.org
+
+© 2026 LuminaLand-Lab – Tous droits réservés.
