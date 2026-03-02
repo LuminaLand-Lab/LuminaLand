@@ -56,7 +56,6 @@ Usage commercial interdit jusqu’au 28 février 2030.
 
 ---
 
-**Nous cherchons un acquéreur stratégique** (35–80 M$ range réaliste).  
 Contact : contact@luminaland.org
 
 © 2026 LuminaLand-Lab – Tous droits réservés.
