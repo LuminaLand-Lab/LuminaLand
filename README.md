@@ -17,7 +17,7 @@ Usage commercial interdit jusqu’au 28 février 2030.
 
 ## 🎮 Démo Live (3D + Compagnons IA + Meme Battles)
 
-[![Try Now](https://img.shields.io/badge/TRY_NOW-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
+[![TRY NOW](https://img.shields.io/badge/TRY_NOW-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
 
 - Planète cosmique + 5 compagnons autonomes avec aura néon  
 - Mini-jeu **Meme Battle** : tape un prompt → combat 3D aléatoire (HP, critiques 20%, dégâts variables)  
