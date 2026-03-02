@@ -3,29 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LuminaLand • Meme Battles Complete</title>
+  <title>LuminaLand • Meme Battles Complete + Fiat</title>
   <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/controls/OrbitControls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=TEST_CLIENT_ID&currency=EUR"></script>
   <style>
     body { margin:0; overflow:hidden; background:#000; font-family:system-ui; color:white; }
-    #ui { position:absolute; bottom:20px; left:20px; right:20px; z-index:100; background:rgba(0,0,0,0.7); padding:15px; border-radius:12px; display:flex; gap:10px; flex-wrap:wrap; }
+    #ui { position:absolute; bottom:20px; left:20px; right:20px; z-index:100; background:rgba(0,0,0,0.8); padding:15px; border-radius:12px; display:flex; flex-wrap:wrap; gap:10px; }
     #chat-input { flex:1; min-width:200px; padding:12px; background:#111; color:#0ff; border:1px solid #0ff; border-radius:8px; }
-    #chat-send, #reset-btn { padding:12px 20px; background:#0ff; color:#000; border:none; border-radius:8px; font-weight:bold; cursor:pointer; }
-    #player-name { padding:12px; background:#111; color:#0ff; border:1px solid #0ff; border-radius:8px; width:140px; }
-    #leaderboard { position:absolute; top:20px; right:20px; background:rgba(0,0,0,0.8); backdrop-filter:blur(12px); padding:15px; border-radius:12px; border:1px solid #0ff; width:340px; max-height:60vh; overflow-y:auto; }
-    .leaderboard-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #333; font-size:14px; }
-    .rank { color:#ffff00; font-weight:bold; min-width:35px; }
-    .player { color:#0ff; flex:1; }
-    .stats { color:#fff; font-size:12px; text-align:right; white-space:nowrap; }
-    .winrate-high { color:#00ff00; font-weight:bold; }
-    .winrate-low { color:#ff4444; }
-    #battle-info { position:absolute; top:20px; left:50%; transform:translateX(-50%); color:#0ff; font-size:1.4rem; font-weight:bold; pointer-events:none; }
+    #chat-send, #connect-wallet, #deposit-stripe, #deposit-paypal { padding:12px 20px; background:#0ff; color:#000; border:none; border-radius:8px; font-weight:bold; cursor:pointer; }
+    #balance { padding:12px; background:#111; color:#0ff; border-radius:8px; min-width:180px; text-align:center; }
+    #marketplace { position:absolute; top:20px; left:20px; background:rgba(0,0,0,0.85); backdrop-filter:blur(12px); padding:15px; border-radius:12px; border:1px solid #0ff; width:360px; max-height:65vh; overflow-y:auto; display:none; }
+    .nft-card { background:#111; padding:12px; margin:8px 0; border-radius:8px; border:1px solid #0ff; }
+    .nft-card button { margin-top:8px; padding:8px; background:#ff00ff; color:white; border:none; border-radius:6px; cursor:pointer; width:100%; }
+    .timer { color:#ffff00; font-weight:bold; }
+    .timer-low { color:#ff4444; animation: pulse 1s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
   </style>
 </head>
 <body>
   <div id="battle-info"></div>
+  <div id="marketplace">
+    <h3 style="color:#0ff;">Marketplace & Enchères</h3>
+    <div id="market-list"></div>
+  </div>
   <div id="leaderboard">
-    <h3 style="color:#0ff; margin-bottom:10px; font-weight:bold;">TOP 10 + WINRATE</h3>
+    <h3 style="color:#0ff;">TOP 10 + WINRATE</h3>
     <div id="leaderboard-list"></div>
     <button id="reset-btn" style="margin-top:10px; width:100%;">Reset Leaderboard</button>
   </div>
@@ -33,43 +38,47 @@
     <input id="player-name" type="text" placeholder="Ton pseudo" value="Gebhartl Stevens">
     <input id="chat-input" type="text" placeholder="Décris ton meme battle...">
     <button id="chat-send">LANCER COMBAT</button>
+    <button id="connect-wallet">Connect Wallet</button>
+    <button id="deposit-stripe">Carte (Stripe)</button>
+    <button id="deposit-paypal">PayPal</button>
+    <div id="balance">0.00 $LUMI</div>
+    <button id="open-market" style="background:#ff00ff;">Marketplace</button>
   </div>
 
   <script>
-    // Leaderboard
+    // === CONFIG ===
+    const LUMINA_TOKEN_ADDRESS = "0x0000000000000000000000000000000000000000"; // Remplace par ton contrat $LUMI
+    const LUMINA_PLOT_ADDRESS = "0x0000000000000000000000000000000000000000"; // Remplace par ton contrat LuminaPlot
+
+    let provider, signer, tokenContract, plotContract, userAddress = null;
+
+    // === LEADERBOARD ===
     let leaderboard = JSON.parse(localStorage.getItem('luminalandLeaderboard')) || [];
-    let playerName = localStorage.getItem('luminalandPlayerName') || 'Gebhartl Stevens';
-    document.getElementById('player-name').value = playerName;
-
+    let playerName = "Gebhartl Stevens";
     let playerStats = leaderboard.find(p => p.name === playerName) || { name: playerName, wins: 0, losses: 0, lumi: 0, battles: 0 };
-
-    function getWinrate(stats) {
-      return stats.battles === 0 ? 0 : ((stats.wins / stats.battles) * 100).toFixed(1);
-    }
 
     function updateLeaderboard() {
       leaderboard = [...leaderboard.filter(p => p.name !== playerName), playerStats]
         .sort((a,b) => b.wins - a.wins || getWinrate(b) - getWinrate(a) || b.lumi - a.lumi)
         .slice(0,10);
       localStorage.setItem('luminalandLeaderboard', JSON.stringify(leaderboard));
-      localStorage.setItem('luminalandPlayerName', playerName);
       renderLeaderboard();
+    }
+
+    function getWinrate(stats) {
+      return stats.battles === 0 ? 0 : ((stats.wins / stats.battles) * 100).toFixed(1);
     }
 
     function renderLeaderboard() {
       const list = document.getElementById('leaderboard-list');
-      list.innerHTML = leaderboard.map((p, i) => {
-        const wr = getWinrate(p);
-        const wrClass = wr >= 50 ? 'winrate-high' : (wr > 0 ? 'winrate-low' : '');
-        return `
-          <div class="leaderboard-row">
-            <span class="rank">#${i+1}</span>
-            <span class="player">${p.name}</span>
-            <span class="stats ${wrClass}">${p.wins}W/${p.losses}L (${wr}%)</span>
-            <span class="stats">${p.lumi}$LUMI</span>
-          </div>
-        `;
-      }).join('');
+      list.innerHTML = leaderboard.map((p, i) => `
+        <div class="leaderboard-row">
+          <span class="rank">#${i+1}</span>
+          <span class="player">${p.name}</span>
+          <span class="stats">${p.wins}W/${p.losses}L (${getWinrate(p)}%)</span>
+          <span class="stats">${p.lumi}$LUMI</span>
+        </div>
+      `).join('');
     }
     renderLeaderboard();
 
@@ -88,32 +97,57 @@
       updateLeaderboard();
     });
 
-    // === SCÈNE 3D ===
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000011);
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 5, 15);
-    const renderer = new THREE.WebGLRenderer({antialias:true});
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    // === WALLET ===
+    document.getElementById('connect-wallet').addEventListener('click', async () => {
+      if (!window.ethereum) return alert("MetaMask non détecté");
+      provider = new ethers.BrowserProvider(window.ethereum);
+      signer = await provider.getSigner();
+      userAddress = await signer.getAddress();
+      document.getElementById('connect-wallet').innerText = userAddress.slice(0,6) + "..." + userAddress.slice(-4);
+      document.getElementById('balance').innerText = "0.00 $LUMI";
+    });
 
-    // Planète + anneau + étoiles
-    const planet = new THREE.Mesh(new THREE.SphereGeometry(5,64,64), new THREE.MeshStandardMaterial({color:0x001122, emissive:0x002244}));
-    scene.add(planet);
-    const ring = new THREE.Mesh(new THREE.RingGeometry(7,9,128), new THREE.MeshBasicMaterial({color:0x00ffff, side:THREE.DoubleSide, transparent:true, opacity:0.35}));
-    ring.rotation.x = Math.PI/2; scene.add(ring);
+    // === PAIEMENTS FIAT ===
+    const stripe = Stripe('pk_test_XXXXXXXXXXXXXXXXXXXXXXXX'); // ← Remplace par ta clé Stripe
 
-    const starsGeometry = new THREE.BufferGeometry();
-    const starsCount = 1200; const posArray = new Float32Array(starsCount*3);
-    for(let i=0;i<starsCount*3;i++) posArray[i]=(Math.random()-0.5)*120;
-    scene.add(new THREE.Points(starsGeometry.setAttribute('position',new THREE.BufferAttribute(posArray,3)), new THREE.PointsMaterial({color:0xaaaaaa,size:0.12})));
+    document.getElementById('deposit-stripe').addEventListener('click', async () => {
+      const amount = prompt("Montant en € ?\n5€ = 50 $LUMI\n10€ = 110 $LUMI\n25€ = 300 $LUMI", "10");
+      if (!amount) return;
+      alert(`Paiement Stripe de ${amount}€ initié... (simulation réussie pour démo)`);
+      playerStats.lumi += Math.round(amount * 10);
+      updateLeaderboard();
+      document.getElementById('balance').innerText = playerStats.lumi + " $LUMI";
+    });
 
-    scene.add(new THREE.AmbientLight(0x4040ff,0.7));
-    scene.add(new THREE.PointLight(0xffffff,1.8).position.set(15,15,15));
+    document.getElementById('deposit-paypal').addEventListener('click', () => {
+      const amount = prompt("Montant en € avec PayPal ?", "10");
+      if (!amount) return;
+
+      const paypalContainer = document.createElement('div');
+      paypalContainer.id = 'paypal-button-container';
+      document.body.appendChild(paypalContainer);
+
+      paypal.Buttons({
+        createOrder: (data, actions) => actions.order.create({
+          purchase_units: [{ amount: { value: amount, currency_code: 'EUR' } }]
+        }),
+        onApprove: (data, actions) => actions.order.capture().then(() => {
+          alert(`✅ Paiement PayPal de ${amount}€ réussi ! +${Math.round(amount * 10)} $LUMI ajoutés.`);
+          playerStats.lumi += Math.round(amount * 10);
+          updateLeaderboard();
+          document.getElementById('balance').innerText = playerStats.lumi + " $LUMI";
+          paypalContainer.remove();
+        }),
+        onCancel: () => {
+          alert("Paiement PayPal annulé.");
+          paypalContainer.remove();
+        }
+      }).render('#paypal-button-container');
+    });
 
     // === COMBAT ===
     let playerHP = 100, opponentHP = 100, playerMeme, opponentMeme, battleParticles;
+
     function createParticles(color){
       const g = new THREE.BufferGeometry();
       const count=450; const p = new Float32Array(count*3);
@@ -121,6 +155,7 @@
       g.setAttribute('position',new THREE.BufferAttribute(p,3));
       return new THREE.Points(g, new THREE.PointsMaterial({size:0.09,color,transparent:true,blending:THREE.AdditiveBlending}));
     }
+
     function createMemePlane(text, side){
       const canvas = document.createElement('canvas'); canvas.width=512; canvas.height=256;
       const ctx = canvas.getContext('2d');
@@ -188,6 +223,29 @@
         battleParticles.rotation.y += 0.15;
       }, 800);
     });
+
+    // === SCÈNE 3D ===
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000011);
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 5, 15);
+    const renderer = new THREE.WebGLRenderer({antialias:true});
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    const planet = new THREE.Mesh(new THREE.SphereGeometry(5,64,64), new THREE.MeshStandardMaterial({color:0x001122, emissive:0x002244}));
+    scene.add(planet);
+    const ring = new THREE.Mesh(new THREE.RingGeometry(7,9,128), new THREE.MeshBasicMaterial({color:0x00ffff, side:THREE.DoubleSide, transparent:true, opacity:0.35}));
+    ring.rotation.x = Math.PI/2; scene.add(ring);
+
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsCount = 1200; const posArray = new Float32Array(starsCount*3);
+    for(let i=0;i<starsCount*3;i++) posArray[i]=(Math.random()-0.5)*120;
+    scene.add(new THREE.Points(starsGeometry.setAttribute('position',new THREE.BufferAttribute(posArray,3)), new THREE.PointsMaterial({color:0xaaaaaa,size:0.12})));
+
+    scene.add(new THREE.AmbientLight(0x4040ff,0.7));
+    scene.add(new THREE.PointLight(0xffffff,1.8).position.set(15,15,15));
 
     function animate(){
       requestAnimationFrame(animate);
