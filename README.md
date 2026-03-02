@@ -1,6 +1,6 @@
 # LuminaLand ✨
 
-![LuminaLand Hero](https://raw.githubusercontent.com/LuminaLand-Lab/LuminaLand/main/assets/hero-main.png)
+![LuminaLand Hero](assets/hero-main.png)
 
 **Le métaverse illuminé par l’IA**  
 Prompt-to-World en moins de 8 secondes • Compagnons IA autonomes ultra-vivants • Économie $LUMI déflationniste
@@ -39,12 +39,12 @@ LuminaLand est un métaverse social multi-joueurs boosté par l’IA où :
 
 **Mumei Protocol** est le système interne de fiabilité maximale intégré dans NanashiOS et LuminaLand :
 
-- Auto-vérification en chaîne  
-- Self-healing automatique  
-- Raisonnement rigoureux forcé  
+- Auto-vérification en chaîne (factuel, cohérent, utile, sans risque)  
+- Self-healing : correction automatique des erreurs et incohérences  
+- Raisonnement rigoureux forcé sur chaque décision  
 - Mémoire longue et adaptation au joueur
 
-→ Compagnons ultra-fiables et cohérents.
+→ Compagnons ultra-fiables, cohérents et vivants.
 
 ---
 
@@ -58,15 +58,17 @@ LuminaLand est un métaverse social multi-joueurs boosté par l’IA où :
 - Récompenses $LUMI aléatoires (100–300 par victoire)  
 - Partage score direct sur X/TikTok + sons + vibration
 
+*(GitHub Pages doit être activé pour que le lien fonctionne – rafraîchis la page si 404)*
+
 ---
 
 ## 📁 Galerie des mondes
 
 ![Whitepaper Cover](whitepaper/cover.png)  
-![Tokenomics](tokenomics/tokenomics-chart.png)  
+![Tokenomics Chart](tokenomics/tokenomics-chart.png)  
 ![Vesting Advisors](tokenomics/vesting-advisors.png)  
 ![Landing Page](frontend/landing-hero.png)  
-![Monde Fantasy](assets/world-fantasy-example.png)
+![Monde Fantasy Example](assets/world-fantasy-example.png)
 
 ---
 
@@ -80,7 +82,7 @@ LuminaLand est un métaverse social multi-joueurs boosté par l’IA où :
 
 **Fondé par Gebhartl Stevens**  
 Créateur de NanashiOS, Mumei Protocol & LuminaLand  
-  
+Nous cherchons un acquéreur stratégique (35–80 M$ range réaliste).  
 Contact : contact@luminaland.org
 
 © 2026 LuminaLand-Lab – Tous droits réservés.
