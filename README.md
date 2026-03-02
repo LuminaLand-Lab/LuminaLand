@@ -9,8 +9,10 @@ Prompt-to-World en moins de 8 secondes • Compagnons IA autonomes ultra-vivants
 [![License](https://img.shields.io/badge/License-BSL_1.1-blue)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/LICENSE)
 [![Whitepaper v1.0](https://img.shields.io/badge/Whitepaper-v1.0-purple)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/whitepaper/whitepaper-v1.0.md)
 [![Mumei Protocol](https://img.shields.io/badge/Mumei%20Protocol-Active-8B00FF)](https://github.com/LuminaLand-Lab/LuminaLand)
-[![Demo Live](https://img.shields.io/badge/DEMO-LIVE-brightgreen?style=for-the-badge&logo=vercel&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
+[![Demo Live](https://img.shields.io/badge/DEMO-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
 [![Built with AI](https://img.shields.io/badge/Built%20with-AI-brightgreen)](https://github.com/LuminaLand-Lab/LuminaLand)
+[![Discord](https://img.shields.io/badge/Discord-Join-7289DA?style=flat&logo=discord&logoColor=white)](https://discord.gg/ton-serveur-discord) <!-- remplace par ton vrai lien Discord si tu en as un -->
+[![X Follow](https://img.shields.io/twitter/follow/TonPseudoX?style=social)](https://x.com/TonPseudoX) <!-- remplace par ton vrai @X -->
 
 ---
 
@@ -84,7 +86,7 @@ LuminaLand est un métaverse social multi-joueurs boosté par l’IA où :
 
 **Fondé par Gebhartl Stevens**  
 Créateur de NanashiOS, Mumei Protocol & LuminaLand  
-
+  
 Contact : contact@luminaland.org
 
 © 2026 LuminaLand-Lab – Tous droits réservés.
