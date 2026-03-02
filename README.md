@@ -6,12 +6,15 @@
 Prompt-to-World en moins de 8 secondes • Compagnons IA autonomes ultra-vivants • Économie $LUMI déflationniste
 
 [![GitHub stars](https://img.shields.io/github/stars/LuminaLand-Lab/LuminaLand?style=social)](https://github.com/LuminaLand-Lab/LuminaLand/stargazers)
-[![Forks](https://img.shields.io/github/forks/LuminaLand-Lab/LuminaLand?style=social)](https://github.com/LuminaLand-Lab/LuminaLand/forks)
 [![License](https://img.shields.io/badge/License-BSL_1.1-blue)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/LICENSE)
 [![Whitepaper v1.0](https://img.shields.io/badge/Whitepaper-v1.0-purple)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/whitepaper/whitepaper-v1.0.md)
 [![Mumei Protocol](https://img.shields.io/badge/Mumei%20Protocol-Active-8B00FF)](https://github.com/LuminaLand-Lab/LuminaLand)
 [![Demo Live](https://img.shields.io/badge/DEMO-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
-[![Roadmap](https://img.shields.io/badge/Roadmap-2026-8B00FF)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/docs/roadmap.md)
+[![Solidity](https://img.shields.io/badge/Solidity-363636?style=flat&logo=solidity&logoColor=white)](https://soliditylang.org)
+[![ERC-721](https://img.shields.io/badge/ERC--721-NFTs-00ff88)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/contracts/LuminaPlot.sol)
+[![ERC-20](https://img.shields.io/badge/ERC--20-$LUMI-00ff88)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/contracts/LuminaToken.sol)
+[![Built on Base](https://img.shields.io/badge/Built%20on-Base-0052FF?style=flat&logo=base&logoColor=white)](https://base.org)
+[![Smart Contracts](https://img.shields.io/badge/Smart%20Contracts-Audited-8B00FF)](https://github.com/LuminaLand-Lab/LuminaLand/tree/main/contracts)
 [![Built with AI](https://img.shields.io/badge/Built%20with-AI-brightgreen)](https://github.com/LuminaLand-Lab/LuminaLand)
 
 ---
@@ -82,7 +85,7 @@ LuminaLand est un métaverse social multi-joueurs boosté par l’IA où :
 
 **Fondé par Gebhartl Stevens**  
 Créateur de NanashiOS, Mumei Protocol & LuminaLand  
-Nous cherchons un acquéreur stratégique (35–80 M$ range réaliste).  
+  
 Contact : contact@luminaland.org
 
 © 2026 LuminaLand-Lab – Tous droits réservés.
