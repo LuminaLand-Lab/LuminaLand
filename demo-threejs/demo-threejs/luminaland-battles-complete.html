@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LuminaLand • Battles Complètes</title>
+  <title>LuminaLand • Meme Battles Complete</title>
   <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/controls/OrbitControls.min.js"></script>
   <style>
     body { margin:0; overflow:hidden; background:#000; font-family:system-ui; color:white; }
-    #ui { position:absolute; bottom:20px; left:20px; right:20px; z-index:100; background:rgba(0,0,0,0.7); padding:15px; border-radius:12px; display:flex; flex-wrap:wrap; gap:10px; }
+    #ui { position:absolute; bottom:20px; left:20px; right:20px; z-index:100; background:rgba(0,0,0,0.7); padding:15px; border-radius:12px; display:flex; gap:10px; flex-wrap:wrap; }
     #chat-input { flex:1; min-width:200px; padding:12px; background:#111; color:#0ff; border:1px solid #0ff; border-radius:8px; }
     #chat-send, #reset-btn { padding:12px 20px; background:#0ff; color:#000; border:none; border-radius:8px; font-weight:bold; cursor:pointer; }
     #player-name { padding:12px; background:#111; color:#0ff; border:1px solid #0ff; border-radius:8px; width:140px; }
@@ -20,8 +20,6 @@
     .winrate-high { color:#00ff00; font-weight:bold; }
     .winrate-low { color:#ff4444; }
     #battle-info { position:absolute; top:20px; left:50%; transform:translateX(-50%); color:#0ff; font-size:1.4rem; font-weight:bold; pointer-events:none; }
-    @keyframes shake { 0%,100% { transform: translate(1px,1px) rotate(0deg); } 10%,30%,50%,70%,90% { transform: translate(-1px,-2px) rotate(-1deg); } 20%,40%,60%,80% { transform: translate(-3px,0px) rotate(1deg); } }
-    .shake { animation: shake 0.4s; animation-iteration-count: 3; }
   </style>
 </head>
 <body>
@@ -29,18 +27,18 @@
   <div id="leaderboard">
     <h3 style="color:#0ff; margin-bottom:10px; font-weight:bold;">TOP 10 + WINRATE</h3>
     <div id="leaderboard-list"></div>
-    <button id="reset-btn" style="margin-top:10px; width:100%;">Reset</button>
+    <button id="reset-btn" style="margin-top:10px; width:100%;">Reset Leaderboard</button>
   </div>
   <div id="ui">
-    <input id="player-name" type="text" placeholder="Pseudo" value="Toi">
-    <input id="chat-input" type="text" placeholder="Ton meme...">
-    <button id="chat-send">COMBAT !</button>
+    <input id="player-name" type="text" placeholder="Ton pseudo" value="Gebhartl Stevens">
+    <input id="chat-input" type="text" placeholder="Décris ton meme battle...">
+    <button id="chat-send">LANCER COMBAT</button>
   </div>
 
   <script>
     // Leaderboard
     let leaderboard = JSON.parse(localStorage.getItem('luminalandLeaderboard')) || [];
-    let playerName = localStorage.getItem('luminalandPlayerName') || 'Toi';
+    let playerName = localStorage.getItem('luminalandPlayerName') || 'Gebhartl Stevens';
     document.getElementById('player-name').value = playerName;
 
     let playerStats = leaderboard.find(p => p.name === playerName) || { name: playerName, wins: 0, losses: 0, lumi: 0, battles: 0 };
@@ -76,6 +74,129 @@
     renderLeaderboard();
 
     document.getElementById('reset-btn').addEventListener('click', () => {
-      if (confirm('Reset leaderboard ?')) {
+      if (confirm('Reset tout le leaderboard ?')) {
         leaderboard = [];
-        playerStats = { name: playerName, wins: 0, losses: 0, lumi: 0, battles
+        playerStats = { name: playerName, wins: 0, losses: 0, lumi: 0, battles: 0 };
+        localStorage.removeItem('luminalandLeaderboard');
+        updateLeaderboard();
+      }
+    });
+
+    document.getElementById('player-name').addEventListener('change', e => {
+      playerName = e.target.value.trim() || 'Gebhartl Stevens';
+      playerStats.name = playerName;
+      updateLeaderboard();
+    });
+
+    // === SCÈNE 3D ===
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000011);
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 5, 15);
+    const renderer = new THREE.WebGLRenderer({antialias:true});
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    // Planète + anneau + étoiles
+    const planet = new THREE.Mesh(new THREE.SphereGeometry(5,64,64), new THREE.MeshStandardMaterial({color:0x001122, emissive:0x002244}));
+    scene.add(planet);
+    const ring = new THREE.Mesh(new THREE.RingGeometry(7,9,128), new THREE.MeshBasicMaterial({color:0x00ffff, side:THREE.DoubleSide, transparent:true, opacity:0.35}));
+    ring.rotation.x = Math.PI/2; scene.add(ring);
+
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsCount = 1200; const posArray = new Float32Array(starsCount*3);
+    for(let i=0;i<starsCount*3;i++) posArray[i]=(Math.random()-0.5)*120;
+    scene.add(new THREE.Points(starsGeometry.setAttribute('position',new THREE.BufferAttribute(posArray,3)), new THREE.PointsMaterial({color:0xaaaaaa,size:0.12})));
+
+    scene.add(new THREE.AmbientLight(0x4040ff,0.7));
+    scene.add(new THREE.PointLight(0xffffff,1.8).position.set(15,15,15));
+
+    // === COMBAT ===
+    let playerHP = 100, opponentHP = 100, playerMeme, opponentMeme, battleParticles;
+    function createParticles(color){
+      const g = new THREE.BufferGeometry();
+      const count=450; const p = new Float32Array(count*3);
+      for(let i=0;i<count*3;i+=3){ p[i]=(Math.random()-0.5)*12; p[i+1]=(Math.random()-0.5)*9; p[i+2]=(Math.random()-0.5)*12; }
+      g.setAttribute('position',new THREE.BufferAttribute(p,3));
+      return new THREE.Points(g, new THREE.PointsMaterial({size:0.09,color,transparent:true,blending:THREE.AdditiveBlending}));
+    }
+    function createMemePlane(text, side){
+      const canvas = document.createElement('canvas'); canvas.width=512; canvas.height=256;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = side === 'left' ? '#001133' : '#330011';
+      ctx.fillRect(0,0,512,256);
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 42px Arial';
+      ctx.fillText(text, 70, 150);
+      const texture = new THREE.CanvasTexture(canvas);
+      const plane = new THREE.Mesh(new THREE.PlaneGeometry(6,3), new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide}));
+      plane.position.set(side === 'left' ? -7 : 7, 4, 0);
+      return plane;
+    }
+
+    document.getElementById('chat-send').addEventListener('click', () => {
+      const prompt = document.getElementById('chat-input').value.trim() || "Dragon feu";
+      document.getElementById('chat-input').value = '';
+
+      playerHP = 100; opponentHP = 100;
+      document.getElementById('battle-info').innerHTML = `HP : ${playerHP} vs ${opponentHP}`;
+
+      playerMeme = createMemePlane("TON MEME", 'left');
+      opponentMeme = createMemePlane(prompt, 'right');
+      scene.add(playerMeme); scene.add(opponentMeme);
+
+      battleParticles = createParticles(0x00ffff);
+      battleParticles.position.set(0,4,0);
+      scene.add(battleParticles);
+
+      const interval = setInterval(() => {
+        if (playerHP <= 0 || opponentHP <= 0) {
+          clearInterval(interval);
+          scene.remove(playerMeme); scene.remove(opponentMeme); scene.remove(battleParticles);
+
+          const win = playerHP > 0;
+          const reward = win ? Math.floor(Math.random()*200)+100 : Math.floor(Math.random()*50)+10;
+          playerStats.wins += win ? 1 : 0;
+          playerStats.losses += win ? 0 : 1;
+          playerStats.lumi += reward;
+          playerStats.battles += 1;
+          updateLeaderboard();
+
+          const particlesColor = win ? 0xffff00 : 0xff0000;
+          const winParticles = createParticles(particlesColor);
+          winParticles.position.set(0,5,0);
+          scene.add(winParticles);
+          setTimeout(() => scene.remove(winParticles), 2500);
+
+          document.body.classList.add('shake');
+          setTimeout(() => document.body.classList.remove('shake'), 1200);
+
+          alert(win ? `🏆 VICTOIRE ! +${reward} $LUMI` : `Défaite... +${reward} $LUMI`);
+          return;
+        }
+
+        const attacker = Math.random() > 0.5 ? 'player' : 'opponent';
+        const damage = Math.floor(Math.random() * 30) + 10;
+        const isCrit = Math.random() < 0.2;
+        const finalDamage = isCrit ? damage * 2 : damage;
+
+        if (attacker === 'player') opponentHP = Math.max(0, opponentHP - finalDamage);
+        else playerHP = Math.max(0, playerHP - finalDamage);
+
+        document.getElementById('battle-info').innerHTML = `HP : ${playerHP} vs ${opponentHP} ${isCrit ? '(CRIT !)' : ''}`;
+
+        battleParticles.rotation.y += 0.15;
+      }, 800);
+    });
+
+    function animate(){
+      requestAnimationFrame(animate);
+      planet.rotation.y += 0.0012;
+      renderer.render(scene,camera);
+    }
+    animate();
+
+    window.addEventListener('resize',()=>{ camera.aspect=window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth,window.innerHeight); });
+  </script>
+</body>
+</html>
