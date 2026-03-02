@@ -15,10 +15,19 @@ Usage commercial interdit jusqu’au 28 février 2030.
 
 ---
 
-## 🎥 Démo Live (3D + Compagnons IA)
+## 🎮 Démo Live (3D + Compagnons IA + Meme Battles)
 
-[Ouvrir la démo interactive avec 5 compagnons autonomes](https://luminialand-lab.github.io/LuminaLand/demo-threejs/companions-demo.html)  
-*(GitHub Pages en cours d’activation)*
+[![Try Now](https://img.shields.io/badge/TRY_NOW-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
+
+- Planète cosmique + 5 compagnons autonomes avec aura néon  
+- Mini-jeu **Meme Battle** : tape un prompt → combat 3D aléatoire (HP, critiques 20%, dégâts variables)  
+- Leaderboard top 10 avec victoires/défaites + **winrate %** (vert/rouge)  
+- Récompenses $LUMI aléatoires (100–300 par victoire)  
+- Partage score direct sur X/TikTok (bouton apparaît après battle)  
+- Sons de combat + vibration mobile  
+- Pseudo personnalisable + reset leaderboard
+
+*(GitHub Pages doit être activé – rafraîchis si lien 404)*
 
 ---
 
@@ -40,7 +49,7 @@ Usage commercial interdit jusqu’au 28 février 2030.
 
 ---
 
-**Nous cherchons un acquéreur stratégique** (25–75 M$ range).  
+**Nous cherchons un acquéreur stratégique** (35–80 M$ range réaliste).  
 Contact : contact@luminaland.org
 
 © 2026 LuminaLand-Lab – Tous droits réservés.
