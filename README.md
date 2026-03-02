@@ -22,6 +22,7 @@ Usage commercial interdit jusqu’au 28 février 2030.
 ---
 
 ## 🎮 Démo Live (3D + Compagnons IA + Meme Battles)
+[![TRY NOW](https://img.shields.io/badge/TRY_NOW-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
 
 [Ouvrir la démo complète avec combats aléatoires, leaderboard et winrate](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
 
