@@ -72,4 +72,15 @@ LuminaLand est un métaverse social multi-joueurs boosté par l’IA où :
 
 ## 📜 Documents
 
-- [Whitepaper v
+- [Whitepaper v1.0 (40 pages)](whitepaper/whitepaper-v1.0.md)  
+- [Tokenomics détaillés](tokenomics/tokenomics.md)  
+- [Roadmap 2026-2028](docs/roadmap.md)
+
+---
+
+**Fondé par Gebhartl Stevens**  
+Créateur de NanashiOS, Mumei Protocol & LuminaLand  
+  
+Contact : contact@luminaland.org
+
+© 2026 LuminaLand-Lab – Tous droits réservés.
