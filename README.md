@@ -5,6 +5,12 @@
 **Le métaverse illuminé par l’IA**  
 Prompt-to-World en moins de 8 secondes • IA compagnons autonomes • Économie $LUMI déflationniste
 
+[![GitHub stars](https://img.shields.io/github/stars/LuminaLand-Lab/LuminaLand?style=social)](https://github.com/LuminaLand-Lab/LuminaLand/stargazers)
+[![License](https://img.shields.io/badge/License-BSL_1.1-blue.svg)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/LICENSE)
+[![Whitepaper v1.0](https://img.shields.io/badge/Whitepaper-v1.0-purple)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/whitepaper/whitepaper-v1.0.md)
+[![Built with AI](https://img.shields.io/badge/Built%20with-AI-brightgreen)](https://github.com/LuminaLand-Lab/LuminaLand)
+[![Demo Live](https://img.shields.io/badge/DEMO-LIVE-brightgreen?style=flat-square&logo=vercel)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
+
 ---
 
 ## 🔒 Licence & Protection
@@ -17,7 +23,7 @@ Usage commercial interdit jusqu’au 28 février 2030.
 
 ## 🎮 Démo Live (3D + Compagnons IA + Meme Battles)
 
-[![TRY NOW](https://img.shields.io/badge/TRY_NOW-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
+[Ouvrir la démo complète avec combats aléatoires, leaderboard et winrate](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
 
 - Planète cosmique + 5 compagnons autonomes avec aura néon  
 - Mini-jeu **Meme Battle** : tape un prompt → combat 3D aléatoire (HP, critiques 20%, dégâts variables)  
