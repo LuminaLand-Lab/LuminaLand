@@ -80,9 +80,9 @@ LuminaLand est un métaverse social multi-joueurs boosté par l’IA où :
 
 ---
 
-**Fondé par Gebhartl Stevens**  
+**Fondé par G.Stevens**  
 Créateur de NanashiOS, Mumei Protocol & LuminaLand  
-Nous cherchons un acquéreur stratégique (35–80 M$ range réaliste).  
+
 Contact : contact@luminaland.org
 
 © 2026 LuminaLand-Lab – Tous droits réservés.
