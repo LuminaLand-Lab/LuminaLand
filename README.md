@@ -5,17 +5,22 @@
 **Le métaverse illuminé par l’IA**  
 Prompt-to-World en moins de 8 secondes • Compagnons IA autonomes ultra-vivants • Économie $LUMI déflationniste
 
+[![Demo Live](https://img.shields.io/badge/DEMO-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
 [![GitHub stars](https://img.shields.io/github/stars/LuminaLand-Lab/LuminaLand?style=social)](https://github.com/LuminaLand-Lab/LuminaLand/stargazers)
+[![Forks](https://img.shields.io/github/forks/LuminaLand-Lab/LuminaLand?style=social)](https://github.com/LuminaLand-Lab/LuminaLand/forks)
 [![License](https://img.shields.io/badge/License-BSL_1.1-blue)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/LICENSE)
 [![Whitepaper v1.0](https://img.shields.io/badge/Whitepaper-v1.0-purple)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/whitepaper/whitepaper-v1.0.md)
 [![Mumei Protocol](https://img.shields.io/badge/Mumei%20Protocol-Active-8B00FF)](https://github.com/LuminaLand-Lab/LuminaLand)
-[![Demo Live](https://img.shields.io/badge/DEMO-LIVE-brightgreen?style=for-the-badge&logo=playstation&logoColor=white)](https://luminialand-lab.github.io/LuminaLand/demo-threejs/luminaland-meme-battles-complete.html)
+[![Built with AI](https://img.shields.io/badge/Built%20with-AI-brightgreen)](https://github.com/LuminaLand-Lab/LuminaLand)
 [![Solidity](https://img.shields.io/badge/Solidity-363636?style=flat&logo=solidity&logoColor=white)](https://soliditylang.org)
 [![ERC-721](https://img.shields.io/badge/ERC--721-NFTs-00ff88)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/contracts/LuminaPlot.sol)
 [![ERC-20](https://img.shields.io/badge/ERC--20-$LUMI-00ff88)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/contracts/LuminaToken.sol)
 [![Built on Base](https://img.shields.io/badge/Built%20on-Base-0052FF?style=flat&logo=base&logoColor=white)](https://base.org)
-[![Smart Contracts](https://img.shields.io/badge/Smart%20Contracts-Audited-8B00FF)](https://github.com/LuminaLand-Lab/LuminaLand/tree/main/contracts)
-[![Built with AI](https://img.shields.io/badge/Built%20with-AI-brightgreen)](https://github.com/LuminaLand-Lab/LuminaLand)
+[![Xbox](https://img.shields.io/badge/Xbox-Compatible-107C10?style=flat&logo=xbox&logoColor=white)](https://www.xbox.com)
+[![Nintendo Switch](https://img.shields.io/badge/Switch-Compatible-E60012?style=flat&logo=nintendo-switch&logoColor=white)](https://www.nintendo.com/switch)
+[![Security Policy](https://img.shields.io/badge/Security%20Policy-Active-8B00FF)](https://github.com/LuminaLand-Lab/LuminaLand/blob/main/SECURITY.md)
+[![CodeQL](https://github.com/LuminaLand-Lab/LuminaLand/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/LuminaLand-Lab/LuminaLand/actions/workflows/codeql-analysis.yml)
+[![Dependabot](https://img.shields.io/badge/Dependabot-Enabled-brightgreen)](https://github.com/LuminaLand-Lab/LuminaLand/network/dependabot)
 
 ---
 
